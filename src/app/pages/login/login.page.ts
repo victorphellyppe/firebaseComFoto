@@ -1,4 +1,5 @@
-import { UtilsService } from './../services/utils.service';
+import { Router } from '@angular/router';
+import { UtilsService } from '../../services/utils.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -12,7 +13,8 @@ export class LoginPage implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private utils: UtilsService
+    private utils: UtilsService,
+    private router: Router
   ) { }
 
   // Fácil acesso para campos de formulário
@@ -31,9 +33,6 @@ export class LoginPage implements OnInit {
     });
   }
 
-  get ErrorControl(){
-    return this.credentialsForm.controls;
-  }
   async register(){
     const loading = await this.utils.loadingCtrl.create();
     await loading.present();
@@ -41,9 +40,9 @@ export class LoginPage implements OnInit {
     await loading.dismiss();
 
     if (user) {
-      this.utils.changeRoute('/home');
+      console.log(user);
       console.log('Cadastro realizado com sucesso!');
-
+      this.router.navigateByUrl('/home', { replaceUrl: true });
     } else {
       this.utils.showAlert('Cadastro falhou', 'Por favor tente novamente!');
     }

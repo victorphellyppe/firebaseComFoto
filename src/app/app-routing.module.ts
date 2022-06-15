@@ -13,22 +13,24 @@ const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
 
 const routes: Routes = [
   {
-    path: '',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule),
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule),
     ...canActivate(redirectLoggedInToHome)
   },
   {
-    path: '**',
-    redirectTo: '',
+    path: '',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
-
-
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
+    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule),
     ...canActivate(redirectUnauthorizedToLogin)
-
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule),
+    ...canActivate(redirectUnauthorizedToLogin)
   },
 ];
 

@@ -12,6 +12,11 @@ constructor(public loadingCtrl: LoadingController, public alertCtrl: AlertContro
 
 
 
+  public navigate(nav){
+    this.router.navigate([nav]);
+  }
+
+
   public changeRoute(rota: string, params?: any){
     const navExtras: NavigationExtras = {
       state: {

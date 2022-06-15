@@ -7,7 +7,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 })
 export class AuthService {
 
-  constructor(private auth: Auth) { }
+  constructor(public auth: Auth) { }
 
   async register({email, password}) {
     try{

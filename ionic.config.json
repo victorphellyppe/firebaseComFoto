@@ -1,0 +1,7 @@
+{
+  "name": "firebaseComFoto",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "firebaseComFoto",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

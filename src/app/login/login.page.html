@@ -4,6 +4,20 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
 
+  <form [formGroup]="credentialsForm" (ngSubmit)="login()">
+
+
+      <ion-item fill="solid" class="ion-margin-bottom">
+        <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
+        <ion-note slot="error" *ngIf="(credentialsForm.get('email').invalid && (credentialsForm.get('email').dirty || credentialsForm.get('email').touched))">Email inválido</ion-note>
+      </ion-item>
+
+
+
+
+      <ion-button expand="full" type="submit" [disabled]="!credentialsForm.valid">Login</ion-button>
+      <ion-button expand="full" type="button" (click)="register()">Login</ion-button>
+  </form>
 </ion-content>

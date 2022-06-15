@@ -41,7 +41,9 @@ export class LoginPage implements OnInit {
     await loading.dismiss();
 
     if (user) {
-      this.utils.router.navigateByUrl('/home', { replaceUrl: true });
+      this.utils.changeRoute('/home');
+      console.log('Cadastro realizado com sucesso!');
+
     } else {
       this.utils.showAlert('Cadastro falhou', 'Por favor tente novamente!');
     }
@@ -54,7 +56,7 @@ export class LoginPage implements OnInit {
     await loading.dismiss();
 
     if (user) {
-      this.utils.router.navigateByUrl('/home', { replaceUrl: true });
+      this.utils.changeRoute('/home');
     } else {
       this.utils.showAlert('Login falhou', 'Por favor tente novamente!');
     }

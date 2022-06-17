@@ -1,8 +1,10 @@
+import { User } from './../../interfaces/user';
 import { UtilsService } from './../../services/utils.service';
 import { AuthService } from './../../services/auth.service';
 import { AvatarService } from './../../services/avatar.service';
 import { Component, OnInit } from '@angular/core';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -11,6 +13,7 @@ import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 })
 export class ProfilePage implements OnInit {
   public profile:any = null;
+  // public userList: Observable<User[]>
   constructor(
     public avatarSvc: AvatarService,
     public authSvc: AuthService,

@@ -14,7 +14,7 @@ const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'profile',
     pathMatch: 'full'
   },
   {
@@ -31,6 +31,10 @@ const routes: Routes = [
     path: 'profile',
     loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule),
     ...canActivate(redirectUnauthorizedToLogin)
+  },
+  {
+    path: 'register',
+    loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
   },
 
 ];

@@ -19,9 +19,16 @@
       <img  *ngIf="profile?.imageUrl; else placeholderavatar;" [src]="profile.imageUrl"/>
       <ng-template #placeholderavatar>
         <div class="fallback">
-          <img src="../../../assets/images/user_avatar.jpg"/>
+          <img src="../../../assets/images/user_avatar.jpg" alt="Imagem do usuário."/>
         </div>
       </ng-template>
     </ion-avatar>
   </div>
+  <ion-list>
+    <ion-item *ngFor="let user of ">
+      <ion-label> Meus dados </ion-label>
+
+
+    </ion-item>
+  </ion-list>
 </ion-content>

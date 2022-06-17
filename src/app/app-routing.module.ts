@@ -13,14 +13,14 @@ const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
 
 const routes: Routes = [
   {
-    path: 'login',
-    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule),
-    ...canActivate(redirectLoggedInToHome)
-  },
-  {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full'
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule),
+    ...canActivate(redirectLoggedInToHome)
   },
   {
     path: 'home',
@@ -32,6 +32,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule),
     ...canActivate(redirectUnauthorizedToLogin)
   },
+
 ];
 
 @NgModule({

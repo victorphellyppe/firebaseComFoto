@@ -1,5 +1,5 @@
 {
-	"appId": "io.ionic.starter",
+	"appId": "com.eventos.firebase.admin",
 	"appName": "firebaseComFoto",
 	"webDir": "www",
 	"bundledWebRuntime": false

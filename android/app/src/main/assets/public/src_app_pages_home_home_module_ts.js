@@ -122,6 +122,10 @@ let HomePage = class HomePage {
   }
 
   ngOnInit() {
+    this.initializeFirebase();
+  }
+
+  initializeFirebase() {
     console.log('Initializing HomePage'); // Request permission to use push notifications
     // iOS will prompt user and return if they granted permission or not
     // Android will just grant without prompting
@@ -210,37 +214,6 @@ HomePage = (0,tslib__WEBPACK_IMPORTED_MODULE_8__.__decorate)([(0,_angular_core__
 
 /***/ }),
 
-/***/ 3470:
-/*!****************************************************************************!*\
-  !*** ./node_modules/@capacitor/push-notifications/dist/esm/definitions.js ***!
-  \****************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/// <reference types="@capacitor/cli" />
-
-
-/***/ }),
-
-/***/ 1704:
-/*!**********************************************************************!*\
-  !*** ./node_modules/@capacitor/push-notifications/dist/esm/index.js ***!
-  \**********************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "PushNotifications": () => (/* binding */ PushNotifications)
-/* harmony export */ });
-/* harmony import */ var _capacitor_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @capacitor/core */ 5099);
-/* harmony import */ var _definitions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./definitions */ 3470);
-
-const PushNotifications = (0,_capacitor_core__WEBPACK_IMPORTED_MODULE_0__.registerPlugin)('PushNotifications', {});
-
-
-
-/***/ }),
-
 /***/ 2260:
 /*!******************************************************!*\
   !*** ./src/app/pages/home/home.page.scss?ngResource ***!
@@ -257,7 +230,7 @@ module.exports = "ion-avatar {\n  width: 128px;\n  height: 128px;\n}\n\n.preview
   \******************************************************/
 /***/ ((module) => {
 
-module.exports = "<!-- <ion-header>\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-button (click)=\"logout()\">\r\n        <ion-icon slot=\"icon-only\" name=\"log-out\"></ion-icon>\r\n      </ion-button>\r\n\r\n    </ion-buttons>\r\n    <ion-title>\r\n      Meu perfil\r\n    </ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"ion-padding\">\r\n  <div class=\"preview\">\r\n\r\n    <ion-avatar (click)=\"changeImage()\">\r\n      <img  *ngIf=\"profile?.imageUrl; else placeholderavatar;\" [src]=\"profile.imageUrl\"/>\r\n      <ng-template #placeholderavatar>\r\n        <div class=\"fallback\">\r\n          <p> selecione </p>\r\n        </div>\r\n      </ng-template>\r\n    </ion-avatar>\r\n  </div>\r\n</ion-content> -->\r\n<h1>Home page html</h1>\r\n";
+module.exports = "<ion-header>\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-button (click)=\"logout()\">\r\n        <ion-icon slot=\"icon-only\" name=\"log-out\"></ion-icon>\r\n      </ion-button>\r\n\r\n    </ion-buttons>\r\n    <ion-title>\r\n      Meu perfil\r\n    </ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"ion-padding\">\r\n  <div class=\"preview\">\r\n\r\n    <ion-avatar (click)=\"changeImage()\">\r\n      <img  *ngIf=\"profile?.imageUrl; else placeholderavatar;\" [src]=\"profile.imageUrl\"/>\r\n      <ng-template #placeholderavatar>\r\n        <div class=\"fallback\">\r\n          <p> selecione </p>\r\n        </div>\r\n      </ng-template>\r\n    </ion-avatar>\r\n  </div>\r\n</ion-content>\r\n";
 
 /***/ })
 

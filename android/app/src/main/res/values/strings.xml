@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">firebaseComFoto</string>
+    <string name="title_activity_main">firebaseComFoto</string>
+    <string name="package_name">com.eventos.firebase.admin</string>
+    <string name="custom_url_scheme">com.eventos.firebase.admin</string>
+</resources>

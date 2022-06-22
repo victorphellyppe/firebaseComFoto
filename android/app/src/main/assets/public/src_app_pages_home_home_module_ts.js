@@ -91,16 +91,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "HomePage": () => (/* binding */ HomePage)
 /* harmony export */ });
 /* harmony import */ var C_Aplicativos_ionic_firebaseComFoto_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! tslib */ 4929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _home_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./home.page.html?ngResource */ 8380);
 /* harmony import */ var _home_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./home.page.scss?ngResource */ 2260);
 /* harmony import */ var _services_utils_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../../services/utils.service */ 6517);
 /* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./../../services/auth.service */ 7556);
 /* harmony import */ var _services_avatar_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./../../services/avatar.service */ 5083);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ 2560);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 2560);
 /* harmony import */ var _capacitor_camera__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @capacitor/camera */ 4241);
-/* harmony import */ var _capacitor_push_notifications__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @capacitor/push-notifications */ 1704);
-
 
 
 
@@ -116,12 +114,15 @@ let HomePage = class HomePage {
     this.authSvc = authSvc;
     this.utils = utils;
     this.profile = null;
+    console.log('Home page constructor');
     this.avatarSvc.getUserProfile().subscribe(data => {
       this.profile = data;
     });
+    this.initializeFirebase();
   }
 
   ngOnInit() {
+    console.log('Initializing Ngoninit');
     this.initializeFirebase();
   }
 
@@ -129,30 +130,35 @@ let HomePage = class HomePage {
     console.log('Initializing HomePage'); // Request permission to use push notifications
     // iOS will prompt user and return if they granted permission or not
     // Android will just grant without prompting
-
-    _capacitor_push_notifications__WEBPACK_IMPORTED_MODULE_7__.PushNotifications.requestPermissions().then(result => {
-      if (result.receive === 'granted') {
-        // Register with Apple / Google to receive push via APNS/FCM
-        _capacitor_push_notifications__WEBPACK_IMPORTED_MODULE_7__.PushNotifications.register();
-      } else {// Show some error
-      }
-    }); // On success, we should be able to receive notifications
-
-    _capacitor_push_notifications__WEBPACK_IMPORTED_MODULE_7__.PushNotifications.addListener('registration', token => {
-      alert('Push registration success, token: ' + token.value);
-    }); // Some issue with our setup and push will not work
-
-    _capacitor_push_notifications__WEBPACK_IMPORTED_MODULE_7__.PushNotifications.addListener('registrationError', error => {
-      alert('Error on registration: ' + JSON.stringify(error));
-    }); // Show us the notification payload if the app is open on our device
-
-    _capacitor_push_notifications__WEBPACK_IMPORTED_MODULE_7__.PushNotifications.addListener('pushNotificationReceived', notification => {
-      alert('Push received: ' + JSON.stringify(notification));
-    }); // Method called when tapping on a notification
-
-    _capacitor_push_notifications__WEBPACK_IMPORTED_MODULE_7__.PushNotifications.addListener('pushNotificationActionPerformed', notification => {
-      alert('Push action performed: ' + JSON.stringify(notification));
-    });
+    // PushNotifications.requestPermissions().then(result => {
+    //   console.log(result);
+    //   if (result.receive === 'granted') {
+    //     // Register with Apple / Google to receive push via APNS/FCM
+    //     PushNotifications.register();
+    //   } else {
+    //     // Show some error
+    //   }
+    // });
+    // // On success, we should be able to receive notifications
+    // PushNotifications.addListener('registration',
+    //   (token: Token) => {
+    //     alert('Push registration success, token: ' + token.value);
+    //   });
+    // // Some issue with our setup and push will not work
+    // PushNotifications.addListener('registrationError',
+    //   (error: any) => {
+    //     alert('Error on registration: ' + JSON.stringify(error));
+    //   });
+    // // Show us the notification payload if the app is open on our device
+    // PushNotifications.addListener('pushNotificationReceived',
+    //   (notification: PushNotificationSchema) => {
+    //     alert('Push received: ' + JSON.stringify(notification));
+    //   });
+    // // Method called when tapping on a notification
+    // PushNotifications.addListener('pushNotificationActionPerformed',
+    //   (notification: ActionPerformed) => {
+    //     alert('Push action performed: ' + JSON.stringify(notification));
+    //   });
   }
 
   changeImage() {
@@ -205,7 +211,7 @@ HomePage.ctorParameters = () => [{
   type: _services_utils_service__WEBPACK_IMPORTED_MODULE_3__.UtilsService
 }];
 
-HomePage = (0,tslib__WEBPACK_IMPORTED_MODULE_8__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.Component)({
+HomePage = (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.Component)({
   selector: 'app-home',
   template: _home_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__,
   styles: [_home_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__]
@@ -230,7 +236,7 @@ module.exports = "ion-avatar {\n  width: 128px;\n  height: 128px;\n}\n\n.preview
   \******************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-header>\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-button (click)=\"logout()\">\r\n        <ion-icon slot=\"icon-only\" name=\"log-out\"></ion-icon>\r\n      </ion-button>\r\n\r\n    </ion-buttons>\r\n    <ion-title>\r\n      Meu perfil\r\n    </ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"ion-padding\">\r\n  <div class=\"preview\">\r\n\r\n    <ion-avatar (click)=\"changeImage()\">\r\n      <img  *ngIf=\"profile?.imageUrl; else placeholderavatar;\" [src]=\"profile.imageUrl\"/>\r\n      <ng-template #placeholderavatar>\r\n        <div class=\"fallback\">\r\n          <p> selecione </p>\r\n        </div>\r\n      </ng-template>\r\n    </ion-avatar>\r\n  </div>\r\n</ion-content>\r\n";
+module.exports = "<ion-header>\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-button (click)=\"logout()\">\r\n        <ion-icon slot=\"icon-only\" name=\"log-out\"></ion-icon>\r\n      </ion-button>\r\n\r\n    </ion-buttons>\r\n    <ion-title>\r\n      Meu perfil\r\n    </ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"ion-padding\">\r\n  <div class=\"preview\">\r\n\r\n    <ion-avatar (click)=\"changeImage()\">\r\n      <img  *ngIf=\"profile?.imageUrl; else placeholderavatar;\" [src]=\"profile.imageUrl\"/>\r\n      <ng-template #placeholderavatar>\r\n        <div class=\"fallback\">\r\n          <p> selecione </p>\r\n        </div>\r\n      </ng-template>\r\n    </ion-avatar>\r\n  </div>\r\n  <ion-button>Clica aqui</ion-button>\r\n</ion-content>\r\n";
 
 /***/ })
 

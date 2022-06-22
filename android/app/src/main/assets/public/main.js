@@ -42,6 +42,10 @@ const routes = [
         loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_pages_profile_profile_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./pages/profile/profile.module */ 8558)).then(m => m.ProfilePageModule),
         ...(0,_angular_fire_auth_guard__WEBPACK_IMPORTED_MODULE_0__.canActivate)(redirectUnauthorizedToLogin)
     },
+    {
+        path: 'home/:id',
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_pages_detail_detail_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./pages/detail/detail.module */ 1892)).then(m => m.DetailPageModule)
+    },
 ];
 let AppRoutingModule = class AppRoutingModule {
 };
@@ -427,7 +431,7 @@ var map = {
 		"node_modules_ionic_core_dist_esm_ion-refresher_2_entry_js"
 	],
 	"./ion-reorder_2.entry.js": [
-		2666,
+		3980,
 		"common",
 		"node_modules_ionic_core_dist_esm_ion-reorder_2_entry_js"
 	],

@@ -15,6 +15,8 @@ import { provideStorage, getStorage } from '@angular/fire/storage';
 import { Capacitor } from '@capacitor/core';
 import { indexedDBLocalPersistence, initializeAuth } from 'firebase/auth';
 import { getApp } from 'firebase/app';
+import { SplashScreen } from '@awesome-cordova-plugins/splash-screen/ngx';
+import { StatusBar } from '@awesome-cordova-plugins/status-bar/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -35,7 +37,7 @@ import { getApp } from 'firebase/app';
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, SplashScreen, StatusBar],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

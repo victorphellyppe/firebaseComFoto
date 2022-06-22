@@ -1,6 +1,10 @@
 {
-	"appId": "io.ionic.starter",
-	"appName": "firebaseComFoto",
-	"webDir": "www",
-	"bundledWebRuntime": false
+  "appId": "com.eventos.fire.admin",
+  "appName": "firebaseComFoto",
+  "webDir": "www",
+  "bundledWebRuntime": false,
+  "showSpinner": true,
+  "PushNotifications": {
+    "presentationOptions": ["badge", "sound", "alert"]
+  }
 }

@@ -1,7 +1,7 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
+<ion-header translucent="true" no-border>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-button (click)="logout()">
+      <ion-button (click)="logout()" color="light">
         <ion-icon slot="icon-only" name="log-out"></ion-icon>
       </ion-button>
 
@@ -11,6 +11,27 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content>
+
+<ion-content class="ion-padding">
+  <div class="card">
+    <div class="header">
+      <div class="avatar">
+    <ion-avatar (click)="changeImage()">
+
+      <img  *ngIf="profile?.imageUrl; else placeholderavatar;" [src]="profile.imageUrl"/>
+      <ng-template #placeholderavatar>
+        <div class="fallback">
+          <p> selecione uma foto </p>
+        </div>
+      </ng-template>
+
+    </ion-avatar>
+      </div>
+    </div>
+  </div>
+
+
+
+
 
 </ion-content>

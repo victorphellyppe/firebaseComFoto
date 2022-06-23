@@ -55,7 +55,7 @@ export class LoginPage implements OnInit {
     await loading.dismiss();
 
     if (user) {
-      this.utils.changeRoute('/home');
+      this.utils.changeRoute('/profile');
     } else {
       this.utils.showAlert('Login falhou', 'Por favor tente novamente!');
     }

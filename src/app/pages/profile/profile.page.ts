@@ -1,36 +1,92 @@
-import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { Capacitor } from '@capacitor/core';
+import { FcmService } from './../../services/fcm.service';
 import { UtilsService } from './../../services/utils.service';
 import { AuthService } from './../../services/auth.service';
 import { AvatarService } from './../../services/avatar.service';
 import { Component, OnInit } from '@angular/core';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import {
+  ActionPerformed,
+  PushNotificationSchema,
+  PushNotifications,
+  Token,
+} from '@capacitor/push-notifications';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
 })
-export class ProfilePage {
-  public profile:any = null;
+export class ProfilePage implements OnInit {
+  public profile: any = null;
   constructor(
     public avatarSvc: AvatarService,
     public authSvc: AuthService,
-    public utils: UtilsService
+    public utils: UtilsService,
   ) {
-    this.avatarSvc.getUserProfile().subscribe(data => {
+    this.avatarSvc.getUserProfile().subscribe((data) => {
       this.profile = data;
     });
   }
 
-  async changeImage(){
+  ngOnInit() {
+    this.initializeFirebase();
+  }
+
+
+  initializeFirebase(){
+    if (Capacitor.isNativePlatform) {
+      PushNotifications.requestPermissions().then(
+        (perm) => {
+          if(perm.receive === "granted"){
+            console.log('Permissão é granted');
+            PushNotifications.addListener(
+              'registration',
+              (token: Token) => {
+                console.log('Meu token: ' + JSON.stringify(token));
+              }
+            );
+
+            PushNotifications.addListener('registrationError', (error: any) => {
+              console.log('Error: ' + JSON.stringify(error));
+            });
+
+            PushNotifications.addListener(
+              'pushNotificationReceived',
+              async (notification: PushNotificationSchema) => {
+                console.log('Push received: ' + JSON.stringify(notification));
+              }
+            );
+
+            PushNotifications.addListener(
+              'pushNotificationActionPerformed',
+              async (notification: ActionPerformed) => {
+                const data = notification.notification.data;
+                console.log('Action performed: ' + JSON.stringify(notification.notification));
+                if (data.detailsId) {
+                  console.log("detail id")
+                  // this.router.navigateByUrl(`/home/${data.detailsId}`);
+                }
+              }
+            );
+          } else {
+            alert('registro falhou')
+          }
+        },
+        (err) => console.log(err)
+      );
+    }
+  }
+  async changeImage() {
     const image = await Camera.getPhoto({
       quality: 90,
       allowEditing: false,
       resultType: CameraResultType.Base64,
-      source: CameraSource.Photos
+      source: CameraSource.Photos,
     });
     console.log(image);
 
-    if(image) {
+    if (image) {
       const loading = await this.utils.loadingCtrl.create();
       await loading.present();
 
@@ -39,13 +95,16 @@ export class ProfilePage {
 
       console.log(result, 'log result');
 
-      if(!result){
-        this.utils.showAlert('Upload falhou.', 'Não foi possível fazer o upload da imagem.');
+      if (!result) {
+        this.utils.showAlert(
+          'Upload falhou.',
+          'Não foi possível fazer o upload da imagem.'
+        );
       }
     }
   }
 
-  async logout(){
+  async logout() {
     await this.authSvc.logout();
     this.utils.router.navigateByUrl('/', { replaceUrl: true });
     console.log('Logout');

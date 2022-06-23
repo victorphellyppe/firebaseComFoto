@@ -2,15 +2,12 @@ import { Capacitor } from '@capacitor/core';
 import { Injectable } from '@angular/core';
 import {
   ActionPerformed,
-
   PushNotifications,
   PushNotificationSchema,
-
   Token,
 } from '@capacitor/push-notifications';
 import { Router } from '@angular/router';
 import { Platform } from '@ionic/angular';
-import { Platforms } from '@ionic/core';
 
 @Injectable({
   providedIn: 'root',
@@ -18,8 +15,8 @@ import { Platforms } from '@ionic/core';
 export class FcmService {
   constructor(private platform: Platform, private router: Router) {}
 
-  initPush(platformName: Platforms) {
-    if (platformName !== 'mobileweb') {
+  initPush() {
+    if (Capacitor.isNativePlatform()) {
       this.registerPush();
     }
   }

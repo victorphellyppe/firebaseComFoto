@@ -1,3 +1,5 @@
+import { Capacitor } from '@capacitor/core';
+import { FcmService } from './../../services/fcm.service';
 import { UtilsService } from './../../services/utils.service';
 import { AuthService } from './../../services/auth.service';
 import { AvatarService } from './../../services/avatar.service';
@@ -8,6 +10,9 @@ import {
   PushNotificationSchema,
   PushNotifications,
   Token,
+  PushNotificationToken,
+  PushNotification,
+  PushNotificationActionPerformed,
 } from '@capacitor/push-notifications';
 
 @Component({
@@ -15,77 +20,76 @@ import {
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit{
-  public profile:any = null;
+export class HomePage implements OnInit {
+  public profile: any = null;
   constructor(
     public avatarSvc: AvatarService,
     public authSvc: AuthService,
-    public utils: UtilsService
+    public utils: UtilsService,
   ) {
-    console.log('Home page constructor');
-
-    this.avatarSvc.getUserProfile().subscribe(data => {
+    this.avatarSvc.getUserProfile().subscribe((data) => {
       this.profile = data;
     });
+  }
+
+  ngOnInit() {
     this.initializeFirebase();
   }
 
-  ngOnInit(){
-    console.log('Initializing Ngoninit');
-
-    this.initializeFirebase();
-  }
 
   initializeFirebase(){
-    console.log('Initializing HomePage');
-    // Request permission to use push notifications
-    // iOS will prompt user and return if they granted permission or not
-    // Android will just grant without prompting
-    // PushNotifications.requestPermissions().then(result => {
-    //   console.log(result);
+    if (Capacitor.isNativePlatform) {
+      PushNotifications.requestPermissions().then(
+        (perm) => {
+          if(perm.receive === "granted"){
+            console.log('Permissão é granted');
+            PushNotifications.addListener(
+              'registration',
+              (token: Token) => {
+                console.log('Meu token: ' + JSON.stringify(token));
+              }
+            );
 
-    //   if (result.receive === 'granted') {
-    //     // Register with Apple / Google to receive push via APNS/FCM
-    //     PushNotifications.register();
-    //   } else {
-    //     // Show some error
-    //   }
-    // });
+            PushNotifications.addListener('registrationError', (error: any) => {
+              console.log('Error: ' + JSON.stringify(error));
+            });
 
-    // // On success, we should be able to receive notifications
-    // PushNotifications.addListener('registration',
-    //   (token: Token) => {
-    //     alert('Push registration success, token: ' + token.value);
-    //   });
+            PushNotifications.addListener(
+              'pushNotificationReceived',
+              async (notification: PushNotificationSchema) => {
+                console.log('Push received: ' + JSON.stringify(notification));
+              }
+            );
 
-    // // Some issue with our setup and push will not work
-    // PushNotifications.addListener('registrationError',
-    //   (error: any) => {
-    //     alert('Error on registration: ' + JSON.stringify(error));
-    //   });
-
-    // // Show us the notification payload if the app is open on our device
-    // PushNotifications.addListener('pushNotificationReceived',
-    //   (notification: PushNotificationSchema) => {
-    //     alert('Push received: ' + JSON.stringify(notification));
-    //   });
-
-    // // Method called when tapping on a notification
-    // PushNotifications.addListener('pushNotificationActionPerformed',
-    //   (notification: ActionPerformed) => {
-    //     alert('Push action performed: ' + JSON.stringify(notification));
-    //   });
+            PushNotifications.addListener(
+              'pushNotificationActionPerformed',
+              async (notification: ActionPerformed) => {
+                const data = notification.notification.data;
+                console.log('Action performed: ' + JSON.stringify(notification.notification));
+                if (data.detailsId) {
+                  console.log("detail id")
+                  // this.router.navigateByUrl(`/home/${data.detailsId}`);
+                }
+              }
+            );
+          } else {
+            alert('registro falhou')
+          }
+        },
+        (err) => console.log(err)
+      );
+    }
   }
-  async changeImage(){
+  async changeImage() {
     const image = await Camera.getPhoto({
       quality: 90,
       allowEditing: false,
       resultType: CameraResultType.Base64,
-      source: CameraSource.Photos
+      source: CameraSource.Photos,
     });
     console.log(image);
 
-    if(image) {
+    if (image) {
       const loading = await this.utils.loadingCtrl.create();
       await loading.present();
 
@@ -94,18 +98,18 @@ export class HomePage implements OnInit{
 
       console.log(result, 'log result');
 
-      if(!result){
-        this.utils.showAlert('Upload falhou.', 'Não foi possível fazer o upload da imagem.');
+      if (!result) {
+        this.utils.showAlert(
+          'Upload falhou.',
+          'Não foi possível fazer o upload da imagem.'
+        );
       }
     }
   }
 
-  async logout(){
+  async logout() {
     await this.authSvc.logout();
     this.utils.router.navigateByUrl('/', { replaceUrl: true });
     console.log('Logout');
   }
-
-
-
 }

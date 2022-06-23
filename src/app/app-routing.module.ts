@@ -33,7 +33,7 @@ const routes: Routes = [
     ...canActivate(redirectUnauthorizedToLogin)
   },
   {
-    path: 'home/:id',
+    path: 'detail',
     loadChildren: () => import('./pages/detail/detail.module').then( m => m.DetailPageModule)
   },
 

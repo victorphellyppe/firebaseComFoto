@@ -1,3 +1,4 @@
+import { UtilsService } from './../../services/utils.service';
 import { PushNotifications } from '@capacitor/push-notifications';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';

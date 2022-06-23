@@ -91,15 +91,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ProfilePage": () => (/* binding */ ProfilePage)
 /* harmony export */ });
 /* harmony import */ var C_Aplicativos_ionic_firebaseComFoto_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js */ 1670);
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! tslib */ 4929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _profile_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./profile.page.html?ngResource */ 7364);
 /* harmony import */ var _profile_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./profile.page.scss?ngResource */ 2581);
-/* harmony import */ var _capacitor_camera__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @capacitor/camera */ 4241);
-/* harmony import */ var _services_utils_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./../../services/utils.service */ 6517);
-/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./../../services/auth.service */ 7556);
-/* harmony import */ var _services_avatar_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./../../services/avatar.service */ 5083);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 2560);
-
+/* harmony import */ var _services_utils_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../../services/utils.service */ 6517);
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./../../services/auth.service */ 7556);
+/* harmony import */ var _services_avatar_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./../../services/avatar.service */ 5083);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 2560);
 
 
 
@@ -114,44 +112,17 @@ let ProfilePage = class ProfilePage {
     this.authSvc = authSvc;
     this.utils = utils;
     this.profile = null;
-    this.avatarSvc.getUserProfile().subscribe(data => {
-      this.profile = data;
-    });
   }
 
-  changeImage() {
+  ngOnInit() {}
+
+  logout() {
     var _this = this;
 
     return (0,C_Aplicativos_ionic_firebaseComFoto_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
-      const image = yield _capacitor_camera__WEBPACK_IMPORTED_MODULE_3__.Camera.getPhoto({
-        quality: 90,
-        allowEditing: false,
-        resultType: _capacitor_camera__WEBPACK_IMPORTED_MODULE_3__.CameraResultType.Base64,
-        source: _capacitor_camera__WEBPACK_IMPORTED_MODULE_3__.CameraSource.Photos
-      });
-      console.log(image);
+      yield _this.authSvc.logout();
 
-      if (image) {
-        const loading = yield _this.utils.loadingCtrl.create();
-        yield loading.present();
-        const result = yield _this.avatarSvc.uploadImage(image);
-        yield loading.dismiss();
-        console.log(result, 'log result');
-
-        if (!result) {
-          _this.utils.showAlert('Upload falhou.', 'Não foi possível fazer o upload da imagem.');
-        }
-      }
-    })();
-  }
-
-  logout() {
-    var _this2 = this;
-
-    return (0,C_Aplicativos_ionic_firebaseComFoto_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_0__["default"])(function* () {
-      yield _this2.authSvc.logout();
-
-      _this2.utils.router.navigateByUrl('/', {
+      _this.utils.router.navigateByUrl('/', {
         replaceUrl: true
       });
 
@@ -162,14 +133,14 @@ let ProfilePage = class ProfilePage {
 };
 
 ProfilePage.ctorParameters = () => [{
-  type: _services_avatar_service__WEBPACK_IMPORTED_MODULE_6__.AvatarService
+  type: _services_avatar_service__WEBPACK_IMPORTED_MODULE_5__.AvatarService
 }, {
-  type: _services_auth_service__WEBPACK_IMPORTED_MODULE_5__.AuthService
+  type: _services_auth_service__WEBPACK_IMPORTED_MODULE_4__.AuthService
 }, {
-  type: _services_utils_service__WEBPACK_IMPORTED_MODULE_4__.UtilsService
+  type: _services_utils_service__WEBPACK_IMPORTED_MODULE_3__.UtilsService
 }];
 
-ProfilePage = (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.Component)({
+ProfilePage = (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__decorate)([(0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.Component)({
   selector: 'app-profile',
   template: _profile_page_html_ngResource__WEBPACK_IMPORTED_MODULE_1__,
   styles: [_profile_page_scss_ngResource__WEBPACK_IMPORTED_MODULE_2__]

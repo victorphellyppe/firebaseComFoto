@@ -42,10 +42,6 @@ const routes = [
         loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("common"), __webpack_require__.e("src_app_pages_profile_profile_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./pages/profile/profile.module */ 8558)).then(m => m.ProfilePageModule),
         ...(0,_angular_fire_auth_guard__WEBPACK_IMPORTED_MODULE_0__.canActivate)(redirectUnauthorizedToLogin)
     },
-    {
-        path: 'home/:id',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_pages_detail_detail_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./pages/detail/detail.module */ 1892)).then(m => m.DetailPageModule)
-    },
 ];
 let AppRoutingModule = class AppRoutingModule {
 };
@@ -73,54 +69,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AppComponent": () => (/* binding */ AppComponent)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 4929);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 4929);
 /* harmony import */ var _app_component_html_ngResource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app.component.html?ngResource */ 3383);
 /* harmony import */ var _app_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app.component.scss?ngResource */ 9259);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 2560);
-/* harmony import */ var _capacitor_push_notifications__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @capacitor/push-notifications */ 1704);
-
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 2560);
 
 
 
 
 let AppComponent = class AppComponent {
-    constructor() {
-    }
-    initializeFirebase() {
-        console.log('Initializing HomePage');
-        // Request permission to use push notifications
-        // iOS will prompt user and return if they granted permission or not
-        // Android will just grant without prompting
-        _capacitor_push_notifications__WEBPACK_IMPORTED_MODULE_2__.PushNotifications.requestPermissions().then(result => {
-            if (result.receive === 'granted') {
-                // Register with Apple / Google to receive push via APNS/FCM
-                _capacitor_push_notifications__WEBPACK_IMPORTED_MODULE_2__.PushNotifications.register();
-            }
-            else {
-                // Show some error
-            }
-        });
-        // On success, we should be able to receive notifications
-        _capacitor_push_notifications__WEBPACK_IMPORTED_MODULE_2__.PushNotifications.addListener('registration', (token) => {
-            console.log('Push registration success, token: ' + token.value);
-        });
-        // Some issue with our setup and push will not work
-        _capacitor_push_notifications__WEBPACK_IMPORTED_MODULE_2__.PushNotifications.addListener('registrationError', (error) => {
-            alert('Error on registration: ' + JSON.stringify(error));
-        });
-        // Show us the notification payload if the app is open on our device
-        _capacitor_push_notifications__WEBPACK_IMPORTED_MODULE_2__.PushNotifications.addListener('pushNotificationReceived', (notification) => {
-            alert('Push received: ' + JSON.stringify(notification));
-        });
-        // Method called when tapping on a notification
-        _capacitor_push_notifications__WEBPACK_IMPORTED_MODULE_2__.PushNotifications.addListener('pushNotificationActionPerformed', (notification) => {
-            alert('Push action performed: ' + JSON.stringify(notification));
-        });
-    }
+    constructor() { }
 };
 AppComponent.ctorParameters = () => [];
-AppComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.Component)({
+AppComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_3__.Component)({
         selector: 'app-root',
         template: _app_component_html_ngResource__WEBPACK_IMPORTED_MODULE_0__,
         styles: [_app_component_scss_ngResource__WEBPACK_IMPORTED_MODULE_1__]
@@ -154,7 +116,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_fire_auth__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/fire/auth */ 1577);
 /* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/fire/firestore */ 6466);
 /* harmony import */ var _angular_fire_storage__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/fire/storage */ 2111);
-/* harmony import */ var _capacitor_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @capacitor/core */ 6549);
+/* harmony import */ var _capacitor_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @capacitor/core */ 5099);
 /* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! firebase/auth */ 3628);
 /* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! firebase/app */ 6369);
 
@@ -431,7 +393,7 @@ var map = {
 		"node_modules_ionic_core_dist_esm_ion-refresher_2_entry_js"
 	],
 	"./ion-reorder_2.entry.js": [
-		3980,
+		2666,
 		"common",
 		"node_modules_ionic_core_dist_esm_ion-reorder_2_entry_js"
 	],

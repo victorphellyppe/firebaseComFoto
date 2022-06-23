@@ -10,20 +10,5 @@ import { StatusBar } from '@awesome-cordova-plugins/status-bar/ngx';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor(
-    private platform: Platform,
-    private splashScreen: SplashScreen,
-    private statusBar: StatusBar,
-    private fcmService: FcmService
-  ) {}
-
-  initializeApp(){
-    this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-
-      //colocando configuração do push
-      this.fcmService.initPush("mobile");
-    })
-  }
+  constructor() {}
 }

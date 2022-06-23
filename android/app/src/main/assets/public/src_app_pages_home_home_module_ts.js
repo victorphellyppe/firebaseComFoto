@@ -114,51 +114,9 @@ let HomePage = class HomePage {
     this.authSvc = authSvc;
     this.utils = utils;
     this.profile = null;
-    console.log('Home page constructor');
     this.avatarSvc.getUserProfile().subscribe(data => {
       this.profile = data;
     });
-    this.initializeFirebase();
-  }
-
-  ngOnInit() {
-    console.log('Initializing Ngoninit');
-    this.initializeFirebase();
-  }
-
-  initializeFirebase() {
-    console.log('Initializing HomePage'); // Request permission to use push notifications
-    // iOS will prompt user and return if they granted permission or not
-    // Android will just grant without prompting
-    // PushNotifications.requestPermissions().then(result => {
-    //   console.log(result);
-    //   if (result.receive === 'granted') {
-    //     // Register with Apple / Google to receive push via APNS/FCM
-    //     PushNotifications.register();
-    //   } else {
-    //     // Show some error
-    //   }
-    // });
-    // // On success, we should be able to receive notifications
-    // PushNotifications.addListener('registration',
-    //   (token: Token) => {
-    //     alert('Push registration success, token: ' + token.value);
-    //   });
-    // // Some issue with our setup and push will not work
-    // PushNotifications.addListener('registrationError',
-    //   (error: any) => {
-    //     alert('Error on registration: ' + JSON.stringify(error));
-    //   });
-    // // Show us the notification payload if the app is open on our device
-    // PushNotifications.addListener('pushNotificationReceived',
-    //   (notification: PushNotificationSchema) => {
-    //     alert('Push received: ' + JSON.stringify(notification));
-    //   });
-    // // Method called when tapping on a notification
-    // PushNotifications.addListener('pushNotificationActionPerformed',
-    //   (notification: ActionPerformed) => {
-    //     alert('Push action performed: ' + JSON.stringify(notification));
-    //   });
   }
 
   changeImage() {
@@ -220,6 +178,78 @@ HomePage = (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__decorate)([(0,_angular_core__
 
 /***/ }),
 
+/***/ 4830:
+/*!****************************************************************!*\
+  !*** ./node_modules/@capacitor/camera/dist/esm/definitions.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CameraDirection": () => (/* binding */ CameraDirection),
+/* harmony export */   "CameraResultType": () => (/* binding */ CameraResultType),
+/* harmony export */   "CameraSource": () => (/* binding */ CameraSource)
+/* harmony export */ });
+var CameraSource;
+
+(function (CameraSource) {
+  /**
+   * Prompts the user to select either the photo album or take a photo.
+   */
+  CameraSource["Prompt"] = "PROMPT";
+  /**
+   * Take a new photo using the camera.
+   */
+
+  CameraSource["Camera"] = "CAMERA";
+  /**
+   * Pick an existing photo fron the gallery or photo album.
+   */
+
+  CameraSource["Photos"] = "PHOTOS";
+})(CameraSource || (CameraSource = {}));
+
+var CameraDirection;
+
+(function (CameraDirection) {
+  CameraDirection["Rear"] = "REAR";
+  CameraDirection["Front"] = "FRONT";
+})(CameraDirection || (CameraDirection = {}));
+
+var CameraResultType;
+
+(function (CameraResultType) {
+  CameraResultType["Uri"] = "uri";
+  CameraResultType["Base64"] = "base64";
+  CameraResultType["DataUrl"] = "dataUrl";
+})(CameraResultType || (CameraResultType = {}));
+
+/***/ }),
+
+/***/ 4241:
+/*!**********************************************************!*\
+  !*** ./node_modules/@capacitor/camera/dist/esm/index.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Camera": () => (/* binding */ Camera),
+/* harmony export */   "CameraDirection": () => (/* reexport safe */ _definitions__WEBPACK_IMPORTED_MODULE_1__.CameraDirection),
+/* harmony export */   "CameraResultType": () => (/* reexport safe */ _definitions__WEBPACK_IMPORTED_MODULE_1__.CameraResultType),
+/* harmony export */   "CameraSource": () => (/* reexport safe */ _definitions__WEBPACK_IMPORTED_MODULE_1__.CameraSource)
+/* harmony export */ });
+/* harmony import */ var _capacitor_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @capacitor/core */ 5099);
+/* harmony import */ var _definitions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./definitions */ 4830);
+
+const Camera = (0,_capacitor_core__WEBPACK_IMPORTED_MODULE_0__.registerPlugin)('Camera', {
+  web: () => __webpack_require__.e(/*! import() */ "node_modules_capacitor_camera_dist_esm_web_js").then(__webpack_require__.bind(__webpack_require__, /*! ./web */ 1327)).then(m => new m.CameraWeb())
+});
+
+
+
+/***/ }),
+
 /***/ 2260:
 /*!******************************************************!*\
   !*** ./src/app/pages/home/home.page.scss?ngResource ***!
@@ -236,7 +266,7 @@ module.exports = "ion-avatar {\n  width: 128px;\n  height: 128px;\n}\n\n.preview
   \******************************************************/
 /***/ ((module) => {
 
-module.exports = "<ion-header>\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-button (click)=\"logout()\">\r\n        <ion-icon slot=\"icon-only\" name=\"log-out\"></ion-icon>\r\n      </ion-button>\r\n\r\n    </ion-buttons>\r\n    <ion-title>\r\n      Meu perfil\r\n    </ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"ion-padding\">\r\n  <div class=\"preview\">\r\n\r\n    <ion-avatar (click)=\"changeImage()\">\r\n      <img  *ngIf=\"profile?.imageUrl; else placeholderavatar;\" [src]=\"profile.imageUrl\"/>\r\n      <ng-template #placeholderavatar>\r\n        <div class=\"fallback\">\r\n          <p> selecione </p>\r\n        </div>\r\n      </ng-template>\r\n    </ion-avatar>\r\n  </div>\r\n  <ion-button>Clica aqui</ion-button>\r\n</ion-content>\r\n";
+module.exports = "<ion-header>\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-button (click)=\"logout()\">\r\n        <ion-icon slot=\"icon-only\" name=\"log-out\"></ion-icon>\r\n      </ion-button>\r\n\r\n    </ion-buttons>\r\n    <ion-title>\r\n      Meu perfil\r\n    </ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"ion-padding\">\r\n  <div class=\"preview\">\r\n\r\n    <ion-avatar (click)=\"changeImage()\">\r\n      <img  *ngIf=\"profile?.imageUrl; else placeholderavatar;\" [src]=\"profile.imageUrl\"/>\r\n      <ng-template #placeholderavatar>\r\n        <div class=\"fallback\">\r\n          <p> selecione </p>\r\n        </div>\r\n      </ng-template>\r\n    </ion-avatar>\r\n  </div>\r\n</ion-content>\r\n";
 
 /***/ })
 

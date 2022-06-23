@@ -1,5 +1,5 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
+<ion-header>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-button (click)="logout()">
         <ion-icon slot="icon-only" name="log-out"></ion-icon>
@@ -11,6 +11,24 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content>
 
+<ion-content class="ion-padding">
+  <div class="preview">
+
+    <ion-avatar (click)="changeImage()">
+      <img  *ngIf="profile?.imageUrl; else placeholderavatar;" [src]="profile.imageUrl"/>
+      <ng-template #placeholderavatar>
+        <div class="fallback">
+          <img src="../../../assets/images/user_avatar.jpg" alt="Imagem do usuário."/>
+        </div>
+      </ng-template>
+    </ion-avatar>
+  </div>
+  <ion-list>
+    <ion-item *ngFor="let user of ">
+      <ion-label> Meus dados </ion-label>
+
+
+    </ion-item>
+  </ion-list>
 </ion-content>

@@ -3,6 +3,7 @@ import { UtilsService } from './../../services/utils.service';
 import { AuthService } from './../../services/auth.service';
 import { AvatarService } from './../../services/avatar.service';
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -51,3 +52,5 @@ export class ProfilePage {
     console.log('Logout');
   }
 }
+
+

@@ -14,7 +14,7 @@ const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'tabs',
+    redirectTo: 'tabspages',
     pathMatch: 'full'
   },
   {
@@ -28,15 +28,20 @@ const routes: Routes = [
     loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule),
     ...canActivate(redirectUnauthorizedToLogin)
   },
-  {
-    path: 'detail',
-    loadChildren: () => import('./pages/detail/detail.module').then( m => m.DetailPageModule)
-  },
+
 {
 
     path: 'register',
     loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
   },
+
+  {
+    path: 'tabspages',
+    loadChildren: () => import('./pages/tabspages/tabspages.module').then( m => m.TabspagesPageModule)
+  },
+
+
+
 ];
 
 @NgModule({

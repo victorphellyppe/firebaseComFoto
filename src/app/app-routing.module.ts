@@ -7,37 +7,35 @@ import {
 } from '@angular/fire/auth-guard';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
-const redirectLoggedInToHome = () => redirectLoggedInTo(['detail']);
-
-
+const redirectLoggedInToHome = () => redirectLoggedInTo(['tabslink']);
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'tabspages',
-    pathMatch: 'full'
+    redirectTo: 'tabslink',
+    pathMatch: 'full',
   },
   {
     path: 'login',
-    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule),
-    ...canActivate(redirectLoggedInToHome)
+    loadChildren: () =>
+      import('./pages/login/login.module').then((m) => m.LoginPageModule),
+    ...canActivate(redirectLoggedInToHome),
   },
   {
-    path: 'profile',
-    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule),
-    ...canActivate(redirectUnauthorizedToLogin)
-  },
-
-{
-
     path: 'register',
-    loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
+    loadChildren: () =>
+      import('./pages/register/register.module').then(
+        (m) => m.RegisterPageModule),
+  },
+  {
+    path: 'tabslink',
+    loadChildren: () =>
+      import('./pages/tablinks/tablinks.module').then(
+        (m) => m.TablinksPageModule),
+    ...canActivate(redirectLoggedInToHome),
   },
 
-  {
-    path: 'tabspages',
-    loadChildren: () => import('./pages/tabspages/tabspages.module').then( m => m.TabspagesPageModule)
-  },
+
 
 
 
@@ -45,8 +43,8 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

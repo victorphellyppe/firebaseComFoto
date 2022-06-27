@@ -1,3 +1,4 @@
+import { User } from './../interfaces/user';
 import { Injectable } from '@angular/core';
 import { Auth, createUserWithEmailAndPassword, signOut } from '@angular/fire/auth';
 import { signInWithEmailAndPassword } from 'firebase/auth';
@@ -9,9 +10,9 @@ export class AuthService {
 
   constructor(public auth: Auth) { }
 
-  async register({email, password}) {
+  async register(usr: User) {
     try{
-    const user = await createUserWithEmailAndPassword(this.auth, email, password);
+    const user = await createUserWithEmailAndPassword(this.auth, usr.email, usr.password);
     return user;
     } catch(e) {
       return null;

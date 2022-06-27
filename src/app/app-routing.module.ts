@@ -13,24 +13,32 @@ const redirectLoggedInToHome = () => redirectLoggedInTo(['detail']);
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: 'tabspages',
+    pathMatch: 'full'
+  },
+  {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule),
     ...canActivate(redirectLoggedInToHome)
-  },
-  {
-    path: '',
-    redirectTo: 'login',
-    pathMatch: 'full'
   },
   {
     path: 'profile',
     loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule),
     ...canActivate(redirectUnauthorizedToLogin)
   },
-  {
-    path: 'detail',
-    loadChildren: () => import('./pages/detail/detail.module').then( m => m.DetailPageModule)
+
+{
+
+    path: 'register',
+    loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
   },
+
+  {
+    path: 'tabspages',
+    loadChildren: () => import('./pages/tabspages/tabspages.module').then( m => m.TabspagesPageModule)
+  },
+
 
 
 ];
